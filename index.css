@@ -1,0 +1,33 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+body{
+    color: #3a3938;
+    /* color: #fcf3a4; */
+}
+#container{
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -1;
+}
+canvas{
+    display: block;
+}
+.cover{
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 140px;
+    font-weight: 800;
+    text-transform: capitalize;
+    text-align: center;
+}
+div{
+    height: 100vh;
+    width: 100%;
+    background-color: transparent;
+}

@@ -1,0 +1,24 @@
+{
+  "name": "real-estate-project",
+  "version": "1.0.0",
+  "description": "portfolio-project",
+  "main": "index.js",
+  "author": "The Shujaa",
+  "license": "MIT",
+  "scripts": {
+    "build": "parcel build --no-minify ./index.html",
+    "start":"parcel ./index.html"
+  },
+  "dependencies": {
+    "dat.gui": "^0.7.7",
+    "gsap": "^3.5.1",
+    "parcel-bundler": "^1.12.5",
+    "simple-input-events": "^2.0.0",
+    "three": "^0.122.0",
+    "three-orbit-controls": "^82.1.0"
+  },
+  "devDependencies": {
+    "glslify-bundle": "^5.1.1",
+    "glslify-deps": "^1.3.1"
+  }
+}
