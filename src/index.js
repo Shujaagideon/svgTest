@@ -152,7 +152,7 @@ export default class Sketch {
         this.imageStore = this.animatedBackground.map(img => {
             let bounds = img.getBoundingClientRect()
 
-            let geometry = new THREE.PlaneBufferGeometry(bounds.width, bounds.height, 100, 100);
+            let geometry = new THREE.PlaneBufferGeometry(bounds.width, bounds.height, 300, 300);
             let texture = new THREE.Texture(img);
             texture.needsUpdate = true;
 
