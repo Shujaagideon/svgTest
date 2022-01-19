@@ -134,6 +134,7 @@ export default class Sketch {
                 color: { value: new THREE.Color('#fcf3a4') },
                 texture2: { value: this.texture},
                 uDistortionFrequency: { value: 6.5 },
+                rg: { value: 0 },
                 uDistortionStrength: { value: 0.65 },
                 uDisplacementFrequency: { value: 2.120 },
                 uDisplacementStrength: { value: 0.152 },
@@ -149,7 +150,7 @@ export default class Sketch {
             vertexShader: vertex,
             fragmentShader: fragment
         });
-        this.imageStore = this.animatedBackground.map(img => {
+        this.imageStore = this.animatedBackground.map((img, i) => {
             let bounds = img.getBoundingClientRect()
 
             let geometry = new THREE.PlaneBufferGeometry(bounds.width, bounds.height, 300, 300);
@@ -159,7 +160,9 @@ export default class Sketch {
             let material = this.material.clone();
             material.uniforms.texture2.value = this.texture;
             material.uniforms.uQuadSize.value = new THREE.Vector2(bounds.width, bounds.height)
-
+            if(i == 1){
+                material.uniforms.rg.value = 0.8;
+            }
             this.materials.push(material);
             let mesh = new THREE.Mesh(geometry, material);
 
