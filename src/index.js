@@ -150,17 +150,19 @@ export default class Sketch {
             fragmentShader: fragment
         });
         this.imageStore = this.animatedBackground.map((img, i) => {
+            let bgBlue = false;
             let bounds = img.getBoundingClientRect()
 
-            let geometry = new THREE.PlaneBufferGeometry(bounds.width, bounds.height, 300, 300);
+            let geometry = new THREE.PlaneBufferGeometry(bounds.width, bounds.height, 50, 50);
             let texture = new THREE.Texture(img);
             texture.needsUpdate = true;
 
             let material = this.material.clone();
             material.uniforms.texture2.value = this.texture;
-            material.uniforms.uQuadSize.value = new THREE.Vector2(bounds.width, bounds.height)
-            if(i == 1){
+            material.uniforms.uQuadSize.value = new THREE.Vector2(bounds.width, bounds.height);
+            if(img.classList.contains('ripple-blue')){
                 material.uniforms.rg.value = 0.8;
+                bgBlue = true;
             }
             this.materials.push(material);
             let mesh = new THREE.Mesh(geometry, material);
@@ -171,10 +173,11 @@ export default class Sketch {
             return {
                 img: img,
                 mesh: mesh,
+                bgBlue: bgBlue,
                 top: bounds.top,
                 left: bounds.left,
                 width: bounds.width,
-                height: bounds.height
+                height: bounds.height,
             }
         })
     }
@@ -187,6 +190,26 @@ export default class Sketch {
                 this.play();
             }
         });
+        document.querySelector('.toggle').addEventListener('click',()=>{
+            document.querySelector('.cover').classList.toggle('ripple-blue');
+            this.imageStore.forEach(img=>{
+                if(img.bgBlue){
+                    gsap.to(img.mesh.material.uniforms.rg,{
+                        value: 0,
+                        duration: 0.3
+                    });
+                    img.bgBlue = !img.bgBlue;
+                }
+                else{
+                    gsap.to(img.mesh.material.uniforms.rg, {
+                        value: 0.8,
+                        duration: 0.3
+                    });
+                    img.bgBlue = !img.bgBlue;
+                }
+            })
+            // console.log(document.querySelector('.cover').classList);
+        })
     }
     stop() {
         this.paused = true;
