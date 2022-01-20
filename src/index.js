@@ -151,6 +151,7 @@ export default class Sketch {
         });
         this.imageStore = this.animatedBackground.map((img, i) => {
             let bgBlue = false;
+            let bgOrange = false;
             let bounds = img.getBoundingClientRect()
 
             let geometry = new THREE.PlaneBufferGeometry(bounds.width, bounds.height, 50, 50);
@@ -164,6 +165,10 @@ export default class Sketch {
                 material.uniforms.rg.value = 0.8;
                 bgBlue = true;
             }
+            if (img.classList.contains('ripple-orange')) {
+                material.uniforms.rg.value = 0;
+                bgOrange = true;
+            }
             this.materials.push(material);
             let mesh = new THREE.Mesh(geometry, material);
 
@@ -176,6 +181,7 @@ export default class Sketch {
                 bgBlue: bgBlue,
                 top: bounds.top,
                 left: bounds.left,
+                bgOrange: bgOrange,
                 width: bounds.width,
                 height: bounds.height,
             }
@@ -191,19 +197,18 @@ export default class Sketch {
             }
         });
         document.querySelector('.toggle').addEventListener('click',()=>{
-            document.querySelector('.cover').classList.toggle('ripple-blue');
             this.imageStore.forEach(img=>{
                 if(img.bgBlue){
                     gsap.to(img.mesh.material.uniforms.rg,{
                         value: 0,
-                        duration: 0.3
+                        duration: 0.6
                     });
                     img.bgBlue = !img.bgBlue;
                 }
-                else{
+                else if (img.bgOrange == false && img.bgBlue == false){
                     gsap.to(img.mesh.material.uniforms.rg, {
                         value: 0.8,
-                        duration: 0.3
+                        duration: 0.6
                     });
                     img.bgBlue = !img.bgBlue;
                 }
