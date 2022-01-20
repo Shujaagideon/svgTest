@@ -51,7 +51,7 @@ export default class Sketch {
         // let frustumSize = 10;
         // let aspect = window.innerWidth / window.innerHeight;
         // this.camera = new THREE.OrthographicCamera(frustumSize* aspect / -2, frustumSize*aspect);
-        this.camera.position.set(0, 0, 2);
+        this.camera.position.set(0, 0, 100);
         this.controls = new OrbitControls(this.camera, this.renderer.domElement);
         this.time = 0;
         this.texture = new THREE.TextureLoader().load(ripple);
@@ -109,8 +109,7 @@ export default class Sketch {
         this.material.uniforms.resolution.value.w = a2;
 
         const dist = this.camera.position.z;
-        const height = 1;
-        this.camera.fov = 2 * (180 / Math.PI) * Math.atan(this.height / (2 * dist));
+        this.camera.fov = 2 * Math.atan((this.height / 2) / dist) * (180 / Math.PI);
 
         // if (this.width / this.height > 1) {
         //     this.plane.scale.x = this.camera.aspect;
@@ -133,11 +132,11 @@ export default class Sketch {
                 // color: { value: new THREE.Color('#C78F66') },
                 color: { value: new THREE.Color('#fcf3a4') },
                 texture2: { value: this.texture},
-                uDistortionFrequency: { value: 6.5 },
                 rg: { value: 0 },
+                uDistortionFrequency: { value: 6.5 },
                 uDistortionStrength: { value: 0.65 },
                 uDisplacementFrequency: { value: 2.120 },
-                uDisplacementStrength: { value: 0.152 },
+                uDisplacementStrength: { value: 8.152 },
                 uTextureSize: { type: "v2", value: new THREE.Vector2(100, 100) },
                 uQuadSize: { type: "v2", value: new THREE.Vector2(100, 100) },
                 resolution: { type: "v4", value: new THREE.Vector4() },

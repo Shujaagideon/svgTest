@@ -18,7 +18,6 @@ void main(){
     // gl_FragColor = vec4(finalColor);
     gl_FragColor = texture2D(texture2, vUv);
     gl_FragColor.rg -= rg;
-    gl_FragColor.a -= rg;
     // if(gl_FragColor.r < 0.1) gl_FragColor.a = 0.;
     // if(gl_FragColor.g < 0.1) gl_FragColor.a = 0.;
     // if(gl_FragColor.b < 0.1) gl_FragColor.a = 0.;

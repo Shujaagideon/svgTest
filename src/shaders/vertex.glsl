@@ -36,7 +36,8 @@ vec2 getUv(vec2 uv){
 }
 
 void main(){
-    vUv = getUv(uv);
+    // vUv = getUv(uv);
+    vUv = uv;
     vPosition = getDisplacedPosition(vec3(uv, 1.));
     vec3 newPosition = position;
     newPosition += vPosition;
